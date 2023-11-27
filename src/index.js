@@ -1,13 +1,14 @@
 console.log('Test message');
 
 class Todo {
-  constructor(title, description, dueDate, priority, notes = null, checklist = null) {
+  constructor(title, description, dueDate, priority, notes = null, checklist = null, complete = false) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.notes = notes;
     this.checklist = checklist;
+    this.complete = complete;
   }
 
   get title() {
@@ -57,8 +58,56 @@ class Todo {
   set checklist(value) {
     this._checklist = value;
   }
+
+  get complete() {
+    return this._complete;
+  }
+
+  set complete(value) {
+    this._complete = value;
+  }
 }
 
-let test = new Todo('walk everyday', 'this is a good exercise', 'tomorrow', 'high');
+let testTodo = new Todo('walk everyday', 'this is a good exercise', 'tomorrow', 'high');
 
-console.log(test);
+console.log(testTodo);
+
+class Project {
+  constructor(title) {
+    this.title = title;
+    this.items = [];
+  }
+
+  get title() {
+    return this._title;
+  }
+
+  set title(value) {
+    this._title = value;
+  }
+
+  get items() {
+    return this._items;
+  }
+
+  set items([]) {
+    this._items = [];
+  }
+
+  add(item) {
+    this._items.push(item);
+  }
+
+  remove(item) {
+    let index = this.items.indexOf(item);
+    if (index !== -1) {
+      this._items.splice(index, 1);
+    }
+  }
+}
+
+let testProject = new Project('first project');
+console.log(testProject);
+console.log('add a new item')
+testProject.add(testTodo);
+console.log(testProject);
