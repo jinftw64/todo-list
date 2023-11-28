@@ -68,6 +68,7 @@ class Todo {
   }
 }
 
+// testing
 let testTodo = new Todo('walk everyday', 'this is a good exercise', 'tomorrow', 'high');
 
 console.log(testTodo);
@@ -106,8 +107,46 @@ class Project {
   }
 }
 
+// testing
 let testProject = new Project('first project');
 console.log(testProject);
 console.log('add a new item')
 testProject.add(testTodo);
 console.log(testProject);
+
+function clearMainDiv() {
+  const mainDiv = document.querySelector('main');
+
+  while (mainDiv.firstChild) {
+    mainDiv.removeChild(mainDiv.firstChild);
+  }
+}
+
+function navBarDisplayController() {
+  const navBarDiv = document.querySelector('nav');
+  const navList = document.createElement('ul');
+  const navListItems = {
+    Inbox: 'filepath.js',
+    Today: 'filepath.js',
+    'Next 7 Days': 'filepath.js', // this key has spaces so use the brackets to access the value
+    Projects: 'filepath.js'
+  }
+
+  navBarDiv.appendChild(navList);
+
+  // iterate list to create each element including click event handlers
+  navListItems.forEach((item) => {
+    const element = document.createElement('li');
+    element.innerHTML = item;
+
+    // code below replaces whitespace in key with '-'
+    const modifiedItem = item.replace(/\s+/g, '-');
+
+    element.classList.add(modifiedItem);
+    element.addEventListener('click', () => {
+      clearMainDiv();
+      navListItems(item)(); // lookup value of key and calls it as a function
+    })
+    navList.appendChild(element);
+  });
+}
