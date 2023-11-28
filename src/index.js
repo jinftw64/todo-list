@@ -1,4 +1,7 @@
-console.log('Test message');
+import inboxDisplayController from "./inbox";
+import todayDisplayController from "./today";
+import next7DaysDisplayController from "./next7days";
+import projectsDisplayController from "./projects";
 
 class Todo {
   constructor(title, description, dueDate, priority, notes = null, checklist = null, complete = false) {
@@ -114,7 +117,7 @@ console.log('add a new item')
 testProject.add(testTodo);
 console.log(testProject);
 
-function clearMainDiv() {
+function clearMain() {
   const mainDiv = document.querySelector('main');
 
   while (mainDiv.firstChild) {
@@ -122,31 +125,43 @@ function clearMainDiv() {
   }
 }
 
+function initialPopulateMainDiv() {
+  const body = document.querySelector('body');
+  const mainDiv = document.createElement('main');
+
+  body.appendChild(mainDiv);
+}
+
 function navBarDisplayController() {
-  const navBarDiv = document.querySelector('nav');
+  const body = document.querySelector('body');
+  const navBarDiv = document.createElement('nav');
   const navList = document.createElement('ul');
   const navListItems = {
-    Inbox: 'filepath.js',
-    Today: 'filepath.js',
-    'Next 7 Days': 'filepath.js', // this key has spaces so use the brackets to access the value
-    Projects: 'filepath.js'
+    Projects: projectsDisplayController,
+    Today: todayDisplayController,
+    'Next 7 Days': next7DaysDisplayController, // this key has spaces so use the brackets to access the value
+    Inbox: inboxDisplayController
   }
 
+  body.appendChild(navBarDiv);
   navBarDiv.appendChild(navList);
 
   // iterate list to create each element including click event handlers
-  navListItems.forEach((item) => {
+  for (const key in navListItems) {
     const element = document.createElement('li');
-    element.innerHTML = item;
+    element.innerHTML = key;
 
     // code below replaces whitespace in key with '-'
-    const modifiedItem = item.replace(/\s+/g, '-');
+    const modifiedItem = key.replace(/\s+/g, '-');
 
     element.classList.add(modifiedItem);
     element.addEventListener('click', () => {
-      clearMainDiv();
-      navListItems(item)(); // lookup value of key and calls it as a function
-    })
+      clearMain();
+      navListItems[key](); // lookup value of key and calls it as a function
+    });
     navList.appendChild(element);
-  });
+  }
 }
+
+navBarDisplayController();
+initialPopulateMainDiv();
