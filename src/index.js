@@ -4,6 +4,9 @@ import next7DaysDisplayController from "./next7days";
 import projectsDisplayController from "./projects";
 import PubSub from "./pubsub";
 
+import Project from "./project";
+import Todo from "./todo";
+
 function clearMain() {
   const mainDiv = document.querySelector('main');
 
@@ -57,5 +60,18 @@ initialPopulateMainDiv();
 // testing pubsub module
 const currentEvent = new PubSub();
 
-currentEvent.on('activate', alert);
+currentEvent.on('activate', console.log);
 currentEvent.trigger('activate', 3);
+
+// testing project module
+
+const myFirstProject = new Project('My First Project');
+console.log(myFirstProject.items);
+
+// testing todo module
+const myFirstTodo = new Todo('My First Todo', 'This is a test', '12/01/23', 'high', 'some notes here');
+console.log(myFirstTodo.description);
+
+// test add todo item to project
+myFirstProject.add(myFirstTodo);
+console.log(myFirstProject.items);
