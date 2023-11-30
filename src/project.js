@@ -1,7 +1,7 @@
 class Project {
   constructor(title) {
     this.title = title;
-    this.items = [];
+    this._items = [];
   }
 
   get title() {
@@ -14,10 +14,6 @@ class Project {
 
   get items() {
     return this._items;
-  }
-
-  set items([]) {
-    this._items = [];
   }
 
   add(item) {
