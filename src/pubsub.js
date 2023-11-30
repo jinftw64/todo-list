@@ -1,4 +1,4 @@
-class Event {
+class PubSub {
   constructor() {
     this.events = {};
   }
@@ -26,3 +26,5 @@ class Event {
     }
   }
 }
+
+export default PubSub;

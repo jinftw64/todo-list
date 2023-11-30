@@ -2,6 +2,7 @@ import inboxDisplayController from "./inbox";
 import todayDisplayController from "./today";
 import next7DaysDisplayController from "./next7days";
 import projectsDisplayController from "./projects";
+import PubSub from "./pubsub";
 
 function clearMain() {
   const mainDiv = document.querySelector('main');
@@ -52,3 +53,9 @@ function navBarDisplayController() {
 
 navBarDisplayController();
 initialPopulateMainDiv();
+
+// testing pubsub module
+const currentEvent = new PubSub();
+
+currentEvent.on('activate', alert);
+currentEvent.trigger('activate', 3);
