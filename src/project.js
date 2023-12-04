@@ -1,7 +1,7 @@
 class Project {
   constructor(title) {
     this.title = title;
-    this._items = [];
+    this._allTodos = [];
   }
 
   get title() {
@@ -12,18 +12,18 @@ class Project {
     this._title = value;
   }
 
-  get items() {
-    return this._items;
+  getAllTodos() {
+    return this._allTodos;
   }
 
   add(item) {
-    this._items.push(item);
+    this._allTodos.push(item);
   }
 
   remove(item) {
-    let index = this.items.indexOf(item);
+    let index = this._allTodos.indexOf(item);
     if (index !== -1) {
-      this._items.splice(index, 1);
+      this._allTodos.splice(index, 1);
     }
   }
 }
