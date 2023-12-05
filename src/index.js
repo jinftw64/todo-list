@@ -6,6 +6,7 @@ import PubSub from "./pubsub";
 
 import Project from "./project";
 import Todo from "./todo";
+import Checklist from "./checklist";
 import currentSession from "./tempData";
 
 function clearMain() {
@@ -58,8 +59,9 @@ function navBarDisplayController() {
 navBarDisplayController();
 initialPopulateMainDiv();
 
-// testing pubsub module
-const currentEvent = new PubSub();
+const project0 = new Project('First Project');
+const todo0 = new Todo('test todo', 'test', '11/1/24', 'high', 'test notes');
+project0.add(todo0);
+todo0.addChecklist(new Checklist('check this out'));
 
-currentEvent.on('activate', console.log);
-currentEvent.trigger('activate', 3);
+console.log(project0.getAllTodos());

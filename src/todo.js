@@ -1,11 +1,13 @@
+import mediator from "./pubsub";
+
 class Todo {
-  constructor(title, description, dueDate, priority, notes = null, checklist = null, complete = false) {
+  constructor(title, description, dueDate, priority, notes = null, complete = false) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.notes = notes;
-    this.checklist = checklist;
+    this.checklist = [];
     this.complete = complete;
   }
 
@@ -49,12 +51,18 @@ class Todo {
     this._notes = value;
   }
 
-  get checklist() {
+  getAllChecklists() {
     return this._checklist;
   }
 
-  set checklist(value) {
-    this._checklist = value;
+  addChecklist(value) {
+    this._checklist = this.checklist.push(value);
+    mediator.on()
+  }
+
+  removeChecklist(value) {
+    const index = this.checklist.indexOf(value);
+    this.checklist.splice(index, 1);
   }
 
   get complete() {

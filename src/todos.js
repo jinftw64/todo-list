@@ -58,6 +58,17 @@ function createTodoForm() {
     priority.appendChild(option);
   })
   ul.appendChild(priority);
+
+  li = document.createElement('li');
+  let notes = document.createElement('input');
+  notes.type = 'text';
+  notes.id = 'notes';
+  notes.name = 'todo_notes';
+  notesLabel.for = 'notes';
+  notesLabel.innerHTML = 'Notes'
+  li.appendChild(notesLabel);
+  li.appendChild(notes);
+  ul.appendChild(li);
 }
 
 function todoDisplayController(projectObject) {

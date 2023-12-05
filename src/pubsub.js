@@ -27,4 +27,5 @@ class PubSub {
   }
 }
 
-export default PubSub;
+const mediator = new PubSub();
+export default mediator;
