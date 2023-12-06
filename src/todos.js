@@ -46,7 +46,7 @@ function createTodoForm() {
 
   li = document.createElement('li')
   let priority = document.createElement('select');
-  priority.innerHTML = 'Priority';
+  priorityLabel.innerHTML = 'Priority';
   let priorityChoices = [
     'High',
     'Medium',
@@ -69,6 +69,7 @@ function createTodoForm() {
   li.appendChild(notesLabel);
   li.appendChild(notes);
   ul.appendChild(li);
+
 }
 
 function todoDisplayController(projectObject) {
