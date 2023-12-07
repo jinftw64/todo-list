@@ -1,31 +1,8 @@
 class Project {
-  constructor(title) {
-    this.title = title;
-    this._allTodos = [];
-  }
-
-  get title() {
-    return this._title;
-  }
-
-  set title(value) {
-    this._title = value;
-  }
-
-  getAllTodos() {
-    return this._allTodos;
-  }
-
-  add(item) {
-    this._allTodos.push(item);
-  }
-
-  remove(item) {
-    let index = this._allTodos.indexOf(item);
-    if (index !== -1) {
-      this._allTodos.splice(index, 1);
-    }
+  constructor(name, dueDate, priority) {
+    this.name = name;
+    this.dueDate = dueDate;
+    this.priority = priority;
+    this.isComplete = false;
   }
 }
-
-export default Project;
