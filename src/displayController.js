@@ -19,7 +19,7 @@ class displayController {
   }
 
   refreshToDo() {
-    const main = document.createElement('main');
+    const main = document.querySelector('main');
     const todoUL = document.createElement('ul');
     main.appendChild(todoUL);
 
