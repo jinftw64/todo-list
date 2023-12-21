@@ -28,7 +28,7 @@ class displayController {
       const todoDiv = document.createElement('li');
       todoDiv.classList.add('todo');
       todoDiv.id = index;
-      todoDiv.innerHTML = todo.name;
+      todoDiv.innerHTML = todo.name + '-' + todo.priority;
 
       todoUL.appendChild(todoDiv);
     })

@@ -6,9 +6,9 @@ import Todo from "./todo";
 // test objects in console
 const testProject = new Project('my first project');
 const testProject2 = new Project('second project');
-const testTodo = new Todo('clean the room', '12/25/23', 'high');
-const testTodo2 = new Todo('mess the room', '12/26/23', 'low');
-const testTodo3 = new Todo('play in the room', '12/27/23', 'medium');
+const testTodo = new Todo('clean the room', '12/25/23', 2);
+const testTodo2 = new Todo('mess the room', '12/26/23', 0);
+const testTodo3 = new Todo('play in the room', '12/27/23', 1);
 
 testProject.addTodo(testTodo);
 testProject.addTodo(testTodo2);

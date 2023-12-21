@@ -6,6 +6,12 @@ class Todo {
     this.complete = false;
   }
 
+  _priorityLevels = {
+    0: 'low',
+    1: 'medium',
+    2: 'high'
+  }
+
   get name() {
     return this._name;
   }
@@ -27,7 +33,7 @@ class Todo {
   }
 
   set priority(value) {
-    this._priority = value;
+    this._priority = this._priorityLevels[value];
   }
 
   isComplete() {
