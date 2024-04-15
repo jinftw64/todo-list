@@ -8,16 +8,16 @@ const project = (() => {
     }
   }
 
-  function addProject(title) {
+  function add(title) {
     const project = new Project(title);
     projectList.push(project);
   }
 
-  function editProject(title, index) {
+  function edit(title, index) {
     projectList[index].title = title;
   }
 
-  function deleteProject(index) {
+  function remove(index) {
     if (index > -1) {
       projectList.splice(index, 1);
     }
@@ -25,9 +25,9 @@ const project = (() => {
 
   return {
     projectList,
-    addProject,
-    editProject,
-    deleteProject,
+    add,
+    edit,
+    remove,
   };
 })();
 

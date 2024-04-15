@@ -30,14 +30,14 @@ const todo = (() => {
     }
   }
 
-  function editTodo(projectListIndex, todoIndex, newTitle, newDescription, newPriority, newDueDate) {
+  function editTodo(projectListIndex, todoIndex, title, description, priority, dueDate) {
     if (projectListIndex > -1 || todoIndex > -1) {
       const todo = project.projectList[projectListIndex].todos[todoIndex];
 
-      todo.title = newTitle;
-      todo.description = newDescription;
-      todo.priority = newPriority;
-      todo.dueDate = newDueDate;
+      todo.title = title;
+      todo.description = description;
+      todo.priority = priority;
+      todo.dueDate = dueDate;
     }
   }
 
