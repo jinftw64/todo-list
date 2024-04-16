@@ -7,28 +7,44 @@ const dom = (() => {
   const dialogContainer = document.querySelector('.modal-container');
   const dialogCancel = document.querySelector('.modal-cancel');
   const dialogAction = document.querySelector('.modal-action');
+  const projectUL = document.querySelector('.projects ul')
+  const addAProjectLI = document.querySelector('#add-a-project');
+  const formTitle = document.querySelector('.title');
 
-  function manipulateModal(modalState, modalAction, modalTask, projectIndex, taskIndex) {
+  function showProjects() {
+    while (projectUL.children.length > 1) {
+      projectUL.removeChild(projectUL.firstChild)
+    }
+    project.projectList.forEach((element, index) => {
+      const projectLI = document.createElement('li')
+      projectLI.textContent = element.title;
+      projectLI.setAttribute('data-project-index', index);
+      projectUL.insertBefore(projectLI, addAProjectLI);
+    })
+  }
+
+  function manipulateModal(modalState, modalAction, projectIndex, taskIndex) {
     const modalActionsMap = {
-      'addProject': function() {
-        dialogTitle.innerText = modalAction;
-        dialogContainer.innerText = modalAction;
+      'addProject': () => {
+        dialogTitle.innerText = 'Add a Project';
         dialogAction.innerText = 'Add';
+        dialogCancel.innerText = 'Cancel';
+
+        formTitle.classList.remove('hide')
       },
 
-      'editProject': function() {
+      'editProject': () => {
         dialogTitle.innerText = modalAction;
         dialogContainer.innerText = modalAction;
         dialogAction.innerText = 'Edit';
       },
 
-      'removeProject': function() {
+      'removeProject': () => {
         dialogTitle.innerText = modalAction;
         dialogContainer.innerText = modalAction;
         dialogAction.innerText = 'Delete';
       },
     }
-
     if (modalState === 'show') {
       dialog.showModal();
       modalActionsMap[modalAction]();
@@ -37,6 +53,7 @@ const dom = (() => {
 
   return {
     manipulateModal,
+    showProjects,
   }
 })();
 

@@ -17,9 +17,9 @@
       </div>
 
       <div class="projects">
-        <ol>
-          <li>Add a project</li>
-        </ol>
+        <ul>
+          <li id="add-a-project">Add a project</li>
+        </ul>
       </div>
     </nav>
 
@@ -29,7 +29,14 @@
 
     <dialog>
       <div class="modal-title"></div>
-      <div class="modal-container"></div>
+      <div class="modal-container">
+        <form>
+          <div class="title hide">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title">
+          </div>
+        </form>
+      </div>
       <button class="modal-cancel" type="button"></button>
       <button class="modal-action" type="button"></button>
     </dialog>
