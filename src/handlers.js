@@ -9,6 +9,8 @@ const handlers = (() => {
       const formTitleInput = document.querySelector('#title');
       const dialog = document.querySelector('dialog');
 
+      // todo: use data attributes to map each UI element and then use switches or a map
+
       if (event.target.id === 'add-a-project') {
         dom.manipulateModal('show', 'addProject');
       }
