@@ -12,6 +12,7 @@ const dom = (() => {
   const addAProjectLI = document.querySelector('#add-a-project');
   const formTitle = document.querySelector('.title');
   const formTitleInput = document.querySelector('#title');
+  const container = document.querySelector('.container');
 
   function showProjects() {
     // remove list elements except for last
@@ -79,9 +80,45 @@ const dom = (() => {
     dialog.close();
   }
 
+  function showProjectMain(projectIndex) {
+    const projectTitle = document.createElement('div');
+    const projectContainer = document.createElement('div');
+
+    const currentProject = project.projectList[projectIndex];
+
+    projectTitle.textContent = currentProject.title;
+    projectContainer.appendChild(projectTitle);
+
+    currentProject.todos.forEach((todo) => {
+      const todoContainer = document.createElement('div');
+      const todoTitle = document.createElement('div');
+      const todoDescription = document.createElement('div');
+      const todoPriority = document.createElement('div');
+      const todoDueDate = document.createElement('div');
+      const todoIsComplete = document.createElement('div');
+
+      todoTitle.textContent = todo.title;
+      todoDescription.textContent = todo.description;
+      todoPriority.textContent = todo.priority;
+      todoDueDate.textContent = todo.dueDate;
+      todoIsComplete.textContent = todo.isComplete;
+
+      todoContainer.appendChild(todoTitle);
+      todoContainer.appendChild(todoDescription);
+      todoContainer.appendChild(todoPriority);
+      todoContainer.appendChild(todoDueDate);
+      todoContainer.appendChild(todoIsComplete);
+
+      projectContainer.appendChild(todoContainer);
+    })
+
+    container.appendChild(projectContainer);
+  }
+
   return {
     manipulateModal,
     showProjects,
+    showProjectMain,
     resetAndHideDialog,
   }
 })();
