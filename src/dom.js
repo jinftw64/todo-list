@@ -83,6 +83,17 @@ const dom = (() => {
   function showProjectMain(projectIndex) {
     const projectTitle = document.createElement('div');
     const projectContainer = document.createElement('div');
+    const todoFormContainer = document.createElement('div');
+    const todoFormTitle = document.createElement('input');
+    const todoFormTitleLabel = document.createElement('label');
+    const todoFormDescription = document.createElement('input');
+    const todoFormDescriptionLabel = document.createElement('label');
+    const todoFormPriority = document.createElement('select');
+    const todoFormPriorityLabel = document.createElement('label');
+    const todoFormDueDate = document.createElement('input');
+    const todoFormDueDateLabel = document.createElement('label');
+    const todoFormIsComplete = document.createElement('input');
+    const todoFormIsCompleteLabel = document.createElement('label');
 
     const currentProject = project.projectList[projectIndex];
 
