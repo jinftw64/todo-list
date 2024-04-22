@@ -13,6 +13,11 @@ const handlers = (() => {
         dom.manipulateModal('show', 'addProject');
       }
 
+      if (event.target.classList.contains === 'navbar-project') {
+        const projectIndex = event.target.parentElement.dataset.projectIndex;
+        dom.showProjectMain(projectIndex);
+      }
+
       if (event.target.classList.contains('edit-project')) {
         const projectIndex = event.target.parentElement.dataset.projectIndex;
         console.log(projectIndex);
@@ -20,16 +25,16 @@ const handlers = (() => {
       }
 
       if (event.target.classList.contains('modal-action')) {
+        const projectIndex = event.target.dataset.projectIndex;
 
         if (event.target.innerText === 'Add') {
           project.add(formTitleInput.value);
           Pubsub.trigger('updateProjects');
           dom.resetAndHideDialog();
-          dom.showProjectMain(0);
+          dom.showProjectMain(project.projectList.length - 1);
         }
 
         if (event.target.innerText === 'Edit') {
-          const projectIndex = event.target.dataset.projectIndex;
           project.edit(formTitleInput.value, projectIndex);
           Pubsub.trigger('updateProjects');
           dom.resetAndHideDialog();

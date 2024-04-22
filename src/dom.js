@@ -1,6 +1,7 @@
 import project from "./project";
 import controller from "./controller";
 import Pubsub from "./pubsub";
+import html from "./todoForm.html"
 
 const dom = (() => {
   const dialog = document.querySelector('dialog');
@@ -25,6 +26,8 @@ const dom = (() => {
       const projectLI = document.createElement('li');
       const titleText = document.createTextNode(element.title);
       const edit = document.createElement('button');
+
+      projectLI.classList.add('navbar-project')
 
       edit.classList.add('edit-project');
       edit.textContent = 'Edit';
@@ -83,22 +86,22 @@ const dom = (() => {
   function showProjectMain(projectIndex) {
     const projectTitle = document.createElement('div');
     const projectContainer = document.createElement('div');
-    const todoFormContainer = document.createElement('div');
-    const todoFormTitle = document.createElement('input');
-    const todoFormTitleLabel = document.createElement('label');
-    const todoFormDescription = document.createElement('input');
-    const todoFormDescriptionLabel = document.createElement('label');
-    const todoFormPriority = document.createElement('select');
-    const todoFormPriorityLabel = document.createElement('label');
-    const todoFormDueDate = document.createElement('input');
-    const todoFormDueDateLabel = document.createElement('label');
-    const todoFormIsComplete = document.createElement('input');
-    const todoFormIsCompleteLabel = document.createElement('label');
 
     const currentProject = project.projectList[projectIndex];
 
+    const todoFormContainer = document.createElement('div');
+
+    while (container.children.length > 0) {
+      container.removeChild(container.firstChild)
+    }
+
+    todoFormContainer.classList.add('todoFormContainer');
+
+    todoFormContainer.innerHTML = html;
+
     projectTitle.textContent = currentProject.title;
     projectContainer.appendChild(projectTitle);
+    projectContainer.appendChild(todoFormContainer);
 
     currentProject.todos.forEach((todo) => {
       const todoContainer = document.createElement('div');
