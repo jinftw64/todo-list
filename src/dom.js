@@ -10,7 +10,7 @@ const dom = (() => {
   const dialogCancel = document.querySelector('.modal-cancel');
   const dialogAction = document.querySelector('.modal-action');
   const projectUL = document.querySelector('.projects ul')
-  const addAProjectLI = document.querySelector('#add-a-project');
+  const addAProjectLI = document.querySelector('#navbar-add-project');
   const formTitle = document.querySelector('.title');
   const formTitleInput = document.querySelector('#title');
   const container = document.querySelector('.container');
@@ -29,7 +29,7 @@ const dom = (() => {
 
       projectLI.classList.add('navbar-project')
 
-      edit.classList.add('edit-project');
+      edit.classList.add('navbar-edit-project');
       edit.textContent = 'Edit';
 
       projectLI.appendChild(titleText);

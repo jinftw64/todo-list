@@ -17,4 +17,10 @@ document.body.appendChild(createHelloWorld());
 
 // test code
 handlers.listenForClicks();
-Pubsub.on('updateProjects', dom.showProjects);
+
+Pubsub.on('addProject', dom.showProjects);
+Pubsub.on('addProject', dom.resetAndHideDialog);
+Pubsub.on('addProject', dom.showProjectMain);
+
+Pubsub.on('editProject', dom.showProjects);
+Pubsub.on('editProject', dom.resetAndHideDialog);

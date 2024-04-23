@@ -9,18 +9,17 @@ const handlers = (() => {
       const formTitleInput = document.querySelector('#title');
       const dialog = document.querySelector('dialog');
 
-      if (event.target.id === 'add-a-project') {
+      if (event.target.id === 'navbar-add-project') {
         dom.manipulateModal('show', 'addProject');
       }
 
-      if (event.target.classList.contains === 'navbar-project') {
-        const projectIndex = event.target.parentElement.dataset.projectIndex;
+      if (event.target.classList.contains('navbar-project')) {
+        const projectIndex = event.target.dataset.projectIndex;
         dom.showProjectMain(projectIndex);
       }
 
-      if (event.target.classList.contains('edit-project')) {
+      if (event.target.classList.contains('navbar-edit-project')) {
         const projectIndex = event.target.parentElement.dataset.projectIndex;
-        console.log(projectIndex);
         dom.manipulateModal('show', 'editProject', projectIndex)
       }
 
@@ -29,15 +28,12 @@ const handlers = (() => {
 
         if (event.target.innerText === 'Add') {
           project.add(formTitleInput.value);
-          Pubsub.trigger('updateProjects');
-          dom.resetAndHideDialog();
-          dom.showProjectMain(project.projectList.length - 1);
+          Pubsub.trigger('addProject', project.projectList.length - 1);
         }
 
         if (event.target.innerText === 'Edit') {
           project.edit(formTitleInput.value, projectIndex);
-          Pubsub.trigger('updateProjects');
-          dom.resetAndHideDialog();
+          Pubsub.trigger('editProject');
         }
       }
 
