@@ -1,7 +1,6 @@
 import project from "./project";
 import controller from "./controller";
 import Pubsub from "./pubsub";
-import todoFormHTML from "./todoForm.html"
 
 const dom = (() => {
   const dialog = document.querySelector('dialog');
@@ -11,6 +10,7 @@ const dom = (() => {
   const dialogAction = document.querySelector('.modal-action');
   const projectUL = document.querySelector('.projects ul')
   const addAProjectLI = document.querySelector('#navbar-add-project');
+  const form = document.querySelector('.modal-container form');
   const formTitle = document.querySelector('.title');
   const formTitleInput = document.querySelector('#title');
   const container = document.querySelector('.container');
@@ -67,18 +67,20 @@ const dom = (() => {
 
       'addTodo': () => {
         dialogTitle.innerText = 'Add Todo';
-        dialogContainer.innerHTML = todoFormHTML;
         dialogAction.innerText = 'Add Todo';
         dialogAction.setAttribute('data-project-index', projectIndex);
+
+        for (const child of form.children) {
+          child.classList.remove('hide');
+        }
       },
     }
 
-    const modalContainer = document.querySelector('.modal-container');
-
     if (modalState === 'show') {
-      for (const child of modalContainer.children) {
+      for (const child of form.children) {
         child.classList.add('hide');
       }
+
       dialog.showModal();
       modalActionsMap[modalAction]();
     }

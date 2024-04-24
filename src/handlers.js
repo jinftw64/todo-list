@@ -44,7 +44,7 @@ const handlers = (() => {
 
         if (event.target.innerText === 'Add Todo') {
           const projectIndex = event.target.dataset.projectIndex;
-          const title = document.querySelector('#todoFormTitle');
+          const title = document.querySelector('#title');
           const description = document.querySelector('#todoFormDescription');
           const priority = document.querySelector('#todoFormPriority');
           const dueDate = document.querySelector('#todoFormDueDate');

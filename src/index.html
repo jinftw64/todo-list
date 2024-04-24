@@ -35,6 +35,31 @@
             <label for="title">Title</label>
             <input type="text" id="title" name="title">
           </div>
+
+          <div class="todoFormContainer-description">
+            <label for="todoFormDescription">Description</label>
+            <input type="text" id="todoFormDescription" name="todoFormDescription">
+          </div>
+
+          <div class="todoFormContainer-priority">
+            <label for="todoFormPriority">Priority</label>
+            <select name="todoFormPriority" id="todoFormPriority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+
+          <div class="todoFormContainer-dueDate">
+            <label for="todoFormContainer-dueDate">Due Date</label>
+            <input
+              type="datetime-local"
+              id="todoFormDueDate"
+              name="todoFormDueDate"
+              value="2020-06-12T19:30"
+              min="2020-06-07T00:00"
+              max="2030-06-14T00:00" />
+          </div>
         </form>
       </div>
       <button class="modal-cancel" type="button"></button>
