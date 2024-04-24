@@ -1,7 +1,7 @@
 import project from "./project";
 import controller from "./controller";
 import Pubsub from "./pubsub";
-import html from "./todoForm.html"
+import todoFormHTML from "./todoForm.html"
 
 const dom = (() => {
   const dialog = document.querySelector('dialog');
@@ -43,7 +43,7 @@ const dom = (() => {
     const modalActionsMap = {
       'addProject': () => {
         dialogTitle.innerText = 'Add a Project';
-        dialogAction.innerText = 'Add';
+        dialogAction.innerText = 'Add Project';
         dialogCancel.innerText = 'Cancel';
 
         formTitle.classList.remove('hide')
@@ -51,7 +51,7 @@ const dom = (() => {
 
       'editProject': () => {
         dialogTitle.innerText = 'Edit a Project';
-        dialogAction.innerText = 'Edit';
+        dialogAction.innerText = 'Edit Project';
         dialogCancel.innerText = 'Cancel';
         dialogAction.setAttribute('data-project-index', projectIndex);
 
@@ -62,11 +62,23 @@ const dom = (() => {
       'removeProject': () => {
         dialogTitle.innerText = modalAction;
         dialogContainer.innerText = modalAction;
-        dialogAction.innerText = 'Delete';
+        dialogAction.innerText = 'Delete Project';
+      },
+
+      'addTodo': () => {
+        dialogTitle.innerText = 'Add Todo';
+        dialogContainer.innerHTML = todoFormHTML;
+        dialogAction.innerText = 'Add Todo';
+        dialogAction.setAttribute('data-project-index', projectIndex);
       },
     }
 
+    const modalContainer = document.querySelector('.modal-container');
+
     if (modalState === 'show') {
+      for (const child of modalContainer.children) {
+        child.classList.add('hide');
+      }
       dialog.showModal();
       modalActionsMap[modalAction]();
     }
@@ -86,22 +98,21 @@ const dom = (() => {
   function showProjectMain(projectIndex) {
     const projectTitle = document.createElement('div');
     const projectContainer = document.createElement('div');
+    const createTodoButton = document.createElement('button');
 
     const currentProject = project.projectList[projectIndex];
-
-    const todoFormContainer = document.createElement('div');
 
     while (container.children.length > 0) {
       container.removeChild(container.firstChild)
     }
 
-    todoFormContainer.classList.add('todoFormContainer');
-
-    todoFormContainer.innerHTML = html;
+    createTodoButton.innerText = 'Add Todo';
+    createTodoButton.setAttribute('id', 'addTodo');
+    createTodoButton.dataset.projectIndex = projectIndex;
 
     projectTitle.textContent = currentProject.title;
     projectContainer.appendChild(projectTitle);
-    projectContainer.appendChild(todoFormContainer);
+    projectContainer.appendChild(createTodoButton);
 
     currentProject.todos.forEach((todo) => {
       const todoContainer = document.createElement('div');
