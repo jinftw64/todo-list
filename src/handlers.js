@@ -8,7 +8,6 @@ const handlers = (() => {
   function listenForClicks() {
     document.body.addEventListener('click', function(event) {
       const formTitleInput = document.querySelector('#title');
-      const dialog = document.querySelector('dialog');
 
       if (event.target.id === 'navbar-add-project') {
         dom.manipulateModal('show', 'addProject');
@@ -17,6 +16,12 @@ const handlers = (() => {
       if (event.target.id === 'addTodo') {
         const projectIndex = event.target.dataset.projectIndex;
         dom.manipulateModal('show', 'addTodo', projectIndex);
+      }
+
+      if (event.target.id === 'editTodo') {
+        const projectIndex = event.target.dataset.projectIndex;
+        const todoIndex = event.target.dataset.todoIndex;
+        dom.manipulateModal('show', 'editTodo', projectIndex, todoIndex);
       }
 
       if (event.target.classList.contains('navbar-project')) {
@@ -52,6 +57,19 @@ const handlers = (() => {
           todo.addTodo(title.value, description.value, priority.value, dueDate.value, projectIndex);
 
           Pubsub.trigger('addTodo', projectIndex);
+        }
+
+        if (event.target.innerText === 'Edit Todo') {
+          const projectIndex = event.target.dataset.projectIndex;
+          const todoIndex = event.target.dataset.todoIndex;
+          const title = document.querySelector('#title');
+          const description = document.querySelector('#todoFormDescription');
+          const priority = document.querySelector('#todoFormPriority');
+          const dueDate = document.querySelector('#todoFormDueDate');
+
+          todo.editTodo(projectIndex, todoIndex, title.value, description.value, priority.value, dueDate.value);
+
+          Pubsub.trigger('editTodo', projectIndex);
         }
       }
 

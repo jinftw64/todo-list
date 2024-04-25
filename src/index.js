@@ -27,3 +27,6 @@ Pubsub.on('editProject', dom.resetAndHideDialog);
 
 Pubsub.on('addTodo', dom.resetAndHideDialog);
 Pubsub.on('addTodo', dom.showProjectMain);
+
+Pubsub.on('editTodo', dom.resetAndHideDialog);
+Pubsub.on('editTodo', dom.showProjectMain);

@@ -13,6 +13,9 @@ const dom = (() => {
   const form = document.querySelector('.modal-container form');
   const formTitle = document.querySelector('.title');
   const formTitleInput = document.querySelector('#title');
+  const formDescriptionInput = document.querySelector('#todoFormDescription');
+  const formPriorityInput = document.querySelector('#todoFormPriority');
+  const formDueDateInput = document.querySelector('#todoFormDueDate');
   const container = document.querySelector('.container');
 
   function showProjects() {
@@ -74,6 +77,24 @@ const dom = (() => {
           child.classList.remove('hide');
         }
       },
+
+      'editTodo': () => {
+        dialogTitle.innerText = 'Edit Todo';
+        dialogAction.innerText = 'Edit Todo';
+        dialogAction.dataset.projectIndex = projectIndex;
+        dialogAction.dataset.todoIndex = taskIndex;
+
+        for (const child of form.children) {
+          child.classList.remove('hide');
+        }
+
+        const currentTodo = project.projectList[projectIndex].todos[taskIndex];
+
+        formTitleInput.value = currentTodo.title;
+        formDescriptionInput.value = currentTodo.description;
+        formPriorityInput.value = currentTodo.priority;
+        formDueDateInput.value = currentTodo.dueDate;
+      },
     }
 
     if (modalState === 'show') {
@@ -116,13 +137,14 @@ const dom = (() => {
     projectContainer.appendChild(projectTitle);
     projectContainer.appendChild(createTodoButton);
 
-    currentProject.todos.forEach((todo) => {
+    currentProject.todos.forEach((todo, todoIndex) => {
       const todoContainer = document.createElement('div');
       const todoTitle = document.createElement('div');
       const todoDescription = document.createElement('div');
       const todoPriority = document.createElement('div');
       const todoDueDate = document.createElement('div');
       const todoIsComplete = document.createElement('div');
+      const todoEdit = document.createElement('button');
 
       todoTitle.textContent = todo.title;
       todoDescription.textContent = todo.description;
@@ -130,11 +152,17 @@ const dom = (() => {
       todoDueDate.textContent = todo.dueDate;
       todoIsComplete.textContent = todo.isComplete;
 
+      todoEdit.innerText = 'Edit Todo';
+      todoEdit.setAttribute('id', 'editTodo');
+      todoEdit.dataset.projectIndex = projectIndex;
+      todoEdit.dataset.todoIndex = todoIndex;
+
       todoContainer.appendChild(todoTitle);
       todoContainer.appendChild(todoDescription);
       todoContainer.appendChild(todoPriority);
       todoContainer.appendChild(todoDueDate);
       todoContainer.appendChild(todoIsComplete);
+      todoContainer.appendChild(todoEdit);
 
       projectContainer.appendChild(todoContainer);
     })
