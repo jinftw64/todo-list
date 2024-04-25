@@ -66,12 +66,14 @@ const dom = (() => {
         dialogTitle.innerText = modalAction;
         dialogContainer.innerText = modalAction;
         dialogAction.innerText = 'Delete Project';
+        dialogCancel.innerText = 'Cancel';
       },
 
       'addTodo': () => {
         dialogTitle.innerText = 'Add Todo';
         dialogAction.innerText = 'Add Todo';
         dialogAction.setAttribute('data-project-index', projectIndex);
+        dialogCancel.innerText = 'Cancel';
 
         for (const child of form.children) {
           child.classList.remove('hide');
@@ -81,6 +83,7 @@ const dom = (() => {
       'editTodo': () => {
         dialogTitle.innerText = 'Edit Todo';
         dialogAction.innerText = 'Edit Todo';
+        dialogCancel.innerText = 'Cancel';
         dialogAction.dataset.projectIndex = projectIndex;
         dialogAction.dataset.todoIndex = taskIndex;
 
@@ -94,6 +97,21 @@ const dom = (() => {
         formDescriptionInput.value = currentTodo.description;
         formPriorityInput.value = currentTodo.priority;
         formDueDateInput.value = currentTodo.dueDate;
+      },
+
+      'deleteTodo': () => {
+        const message = document.querySelector('.modal-container .message');
+        const currentTodo = project.projectList[projectIndex].todos[taskIndex];
+
+        dialogTitle.innerText = 'Delete Todo';
+        dialogAction.innerText = 'Delete Todo';
+        dialogCancel.innerText = 'Cancel';
+        dialogAction.dataset.projectIndex = projectIndex;
+        dialogAction.dataset.todoIndex = taskIndex;
+
+        message.textContent = `Delete this task? (${currentTodo.title})`;
+
+        message.classList.remove('hide');
       },
     }
 
@@ -113,6 +131,8 @@ const dom = (() => {
     dialogAction.textContent = '';
 
     formTitleInput.value = '';
+    formDescriptionInput.value = '';
+    formPriorityInput.value = 'low';
     formTitle.classList.add('hide');
 
     dialog.close();
@@ -145,6 +165,7 @@ const dom = (() => {
       const todoDueDate = document.createElement('div');
       const todoIsComplete = document.createElement('div');
       const todoEdit = document.createElement('button');
+      const todoDelete = document.createElement('button');
 
       todoTitle.textContent = todo.title;
       todoDescription.textContent = todo.description;
@@ -152,10 +173,15 @@ const dom = (() => {
       todoDueDate.textContent = todo.dueDate;
       todoIsComplete.textContent = todo.isComplete;
 
-      todoEdit.innerText = 'Edit Todo';
+      todoEdit.textContent = 'Edit Todo';
       todoEdit.setAttribute('id', 'editTodo');
       todoEdit.dataset.projectIndex = projectIndex;
       todoEdit.dataset.todoIndex = todoIndex;
+
+      todoDelete.textContent = 'Delete Todo';
+      todoDelete.setAttribute('id', 'deleteTodo');
+      todoDelete.dataset.projectIndex = projectIndex;
+      todoDelete.dataset.todoIndex = todoIndex;
 
       todoContainer.appendChild(todoTitle);
       todoContainer.appendChild(todoDescription);
@@ -163,6 +189,7 @@ const dom = (() => {
       todoContainer.appendChild(todoDueDate);
       todoContainer.appendChild(todoIsComplete);
       todoContainer.appendChild(todoEdit);
+      todoContainer.appendChild(todoDelete);
 
       projectContainer.appendChild(todoContainer);
     })

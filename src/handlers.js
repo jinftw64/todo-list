@@ -24,6 +24,12 @@ const handlers = (() => {
         dom.manipulateModal('show', 'editTodo', projectIndex, todoIndex);
       }
 
+      if (event.target.id === 'deleteTodo') {
+        const projectIndex = event.target.dataset.projectIndex;
+        const todoIndex = event.target.dataset.todoIndex;
+        dom.manipulateModal('show', 'deleteTodo', projectIndex, todoIndex);
+      }
+
       if (event.target.classList.contains('navbar-project')) {
         const projectIndex = event.target.dataset.projectIndex;
         dom.showProjectMain(projectIndex);
@@ -62,6 +68,7 @@ const handlers = (() => {
         if (event.target.innerText === 'Edit Todo') {
           const projectIndex = event.target.dataset.projectIndex;
           const todoIndex = event.target.dataset.todoIndex;
+
           const title = document.querySelector('#title');
           const description = document.querySelector('#todoFormDescription');
           const priority = document.querySelector('#todoFormPriority');
@@ -70,6 +77,15 @@ const handlers = (() => {
           todo.editTodo(projectIndex, todoIndex, title.value, description.value, priority.value, dueDate.value);
 
           Pubsub.trigger('editTodo', projectIndex);
+        }
+
+        if (event.target.innerText === 'Delete Todo') {
+          const projectIndex = event.target.dataset.projectIndex;
+          const todoIndex = event.target.dataset.todoIndex;
+
+          todo.deleteTodo(projectIndex, todoIndex);
+
+          Pubsub.trigger('deleteTodo', projectIndex);
         }
       }
 
