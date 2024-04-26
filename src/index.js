@@ -1,6 +1,4 @@
 import './style.css'
-import project from "./project";
-import todo from "./todo";
 import dom from "./dom";
 import handlers from './handlers';
 import Pubsub from './pubsub';

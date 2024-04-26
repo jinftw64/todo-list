@@ -1,6 +1,5 @@
 import project from "./project";
-import controller from "./controller";
-import Pubsub from "./pubsub";
+import { format } from "date-fns";
 
 const dom = (() => {
   const dialog = document.querySelector('dialog');
@@ -167,10 +166,12 @@ const dom = (() => {
       const todoEdit = document.createElement('button');
       const todoDelete = document.createElement('button');
 
+      const formatedDueDate = format(todo.dueDate, "MM/dd/yyyy");
+
       todoTitle.textContent = todo.title;
       todoDescription.textContent = todo.description;
       todoPriority.textContent = todo.priority;
-      todoDueDate.textContent = todo.dueDate;
+      todoDueDate.textContent = formatedDueDate;
       todoIsComplete.textContent = todo.isComplete;
 
       todoEdit.textContent = 'Edit Todo';
