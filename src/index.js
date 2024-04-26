@@ -26,6 +26,10 @@ Pubsub.on('editProject', dom.showProjects);
 Pubsub.on('editProject', dom.resetAndHideDialog);
 Pubsub.on('editProject', project.updateLocalStorage);
 
+Pubsub.on('deleteProject', dom.showProjects);
+Pubsub.on('deleteProject', dom.resetAndHideDialog);
+Pubsub.on('deleteProject', project.updateLocalStorage);
+
 Pubsub.on('addTodo', dom.resetAndHideDialog);
 Pubsub.on('addTodo', dom.showProjectMain);
 Pubsub.on('addTodo', project.updateLocalStorage);

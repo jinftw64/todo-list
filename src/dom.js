@@ -28,14 +28,19 @@ const dom = (() => {
       const projectLI = document.createElement('li');
       const titleText = document.createTextNode(element.title);
       const edit = document.createElement('button');
+      const remove = document.createElement('button');
 
       projectLI.classList.add('navbar-project')
 
       edit.classList.add('navbar-edit-project');
       edit.textContent = 'Edit';
 
+      remove.classList.add('navbar-delete-project');
+      remove.textContent = 'Delete';
+
       projectLI.appendChild(titleText);
       projectLI.appendChild(edit);
+      projectLI.appendChild(remove);
       projectLI.setAttribute('data-project-index', index);
       projectUL.insertBefore(projectLI, addAProjectLI);
     })
@@ -61,11 +66,19 @@ const dom = (() => {
         formTitle.classList.remove('hide')
       },
 
-      'removeProject': () => {
-        dialogTitle.innerText = modalAction;
-        dialogContainer.innerText = modalAction;
+      'deleteProject': () => {
+        const message = document.querySelector('.modal-container .message');
+
+        dialogTitle.innerText = 'Delete Project';
         dialogAction.innerText = 'Delete Project';
         dialogCancel.innerText = 'Cancel';
+        dialogAction.dataset.projectIndex = projectIndex;
+
+        const currentProject = project.projectList[projectIndex];
+
+        message.textContent = `Delete this project? (${currentProject.title})`;
+
+        message.classList.remove('hide');
       },
 
       'addTodo': () => {

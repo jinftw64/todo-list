@@ -40,6 +40,11 @@ const handlers = (() => {
         dom.manipulateModal('show', 'editProject', projectIndex)
       }
 
+      if (event.target.classList.contains('navbar-delete-project')) {
+        const projectIndex = event.target.parentElement.dataset.projectIndex;
+        dom.manipulateModal('show', 'deleteProject', projectIndex)
+      }
+
       if (event.target.classList.contains('modal-action')) {
         const projectIndex = event.target.dataset.projectIndex;
 
@@ -51,6 +56,11 @@ const handlers = (() => {
         if (event.target.innerText === 'Edit Project') {
           project.edit(formTitleInput.value, projectIndex);
           Pubsub.trigger('editProject');
+        }
+
+        if (event.target.innerText === 'Delete Project') {
+          project.remove(projectIndex);
+          Pubsub.trigger('deleteProject');
         }
 
         if (event.target.innerText === 'Add Todo') {
