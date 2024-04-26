@@ -4,13 +4,7 @@ import project from './project';
 import handlers from './handlers';
 import Pubsub from './pubsub';
 
-function createHelloWorld() {
-  const element = document.createElement('div');
-
-  element.innerText = 'Hello world';
-
-  return element;
-}
+dom.showProjects();
 
 document.body.appendChild(createHelloWorld());
 
